@@ -1,0 +1,29 @@
+# Google DNS（支持ECS和H3协议）
+DOMAIN-SUFFIX,dns.google
+
+# Cloudflare DNS（全球最快响应）
+DOMAIN-SUFFIX,cloudflare-dns.com
+
+# Quad9（支持DNSSEC验证）
+DOMAIN-SUFFIX,dns.quad9.net
+
+# AdGuard Public DNS（去广告版）
+DOMAIN-SUFFIX,dns.adguard.com
+
+# NextDNS（支持H3协议）
+DOMAIN-SUFFIX,dns.nextdns.io
+
+# OpenDNS（思科旗下服务）
+DOMAIN-SUFFIX,doh.opendns.com
+
+# Yandex DNS（俄罗斯主流服务）
+DOMAIN-SUFFIX,doh.yandex.net
+
+# CleanBrowsing（安全过滤版）
+DOMAIN-SUFFIX,doh.cleanbrowsing.org
+
+# Comodo Secure DNS
+DOMAIN-SUFFIX,doh.comodo.com
+
+# DNS.WATCH（德国中立服务）
+DOMAIN-SUFFIX,dns.dnswatch.com
