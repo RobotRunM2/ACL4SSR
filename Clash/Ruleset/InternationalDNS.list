@@ -3,6 +3,7 @@ DOMAIN-SUFFIX,dns.google
 
 # Cloudflare DNS（全球最快响应）
 DOMAIN-SUFFIX,cloudflare-dns.com
+DOMAIN-SUFFIX,dns.cloudflare.com
 
 # Quad9（支持DNSSEC验证）
 DOMAIN-SUFFIX,dns.quad9.net
