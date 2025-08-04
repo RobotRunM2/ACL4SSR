@@ -159,19 +159,19 @@ proxy-groups:
   - { name: 🌐 国际DNS, type: select, <<: *proxies }
   - { name: 📲 Telegram, type: select, <<: *proxies }
   - { name: 📹 YouTube, type: select, <<: *proxies }
-  - { name: 🍀 Google, type: select, <<: *proxies }
+  - { name: 🔍️ Google, type: select, <<: *proxies }
   - { name: 🤖 AI, type: select, <<: *proxies }
   - { name: 👨🏿‍💻 GitHub, type: select, <<: *proxies }
   - { name: Ⓜ️ OneDrive, type: select, <<: *proxies }
   - { name: Ⓜ️ Microsoft, type: select, <<: *proxies }
   - { name: 🎵 TikTok, type: select, <<: *proxies }
+  - { name: 📧 邮件服务, type: select, <<: *proxies }
   - { name: 🌍 国外媒体, type: select, <<: *proxies }
   - { name: 🎥 NETFLIX, type: select, <<: *proxies }
   - { name: ✈️ Speedtest, type: select, <<: *proxies }
   - { name: 💶 PayPal, type: select, <<: *proxies }
   - { name: 🍎 Apple, type: select, <<: *proxies }
   - { name: 🎮 游戏平台, type: select, <<: *proxies }
-
   - { name: 🐟 漏网之鱼, type: select, <<: *proxies }
   - { name: 🎯 全球直连, type: select, proxies: [DIRECT, 🚀 手动切换] }
   - { name: 🛑 广告拦截, type: select, proxies: [DIRECT, REJECT] }
@@ -283,11 +283,10 @@ rules:
   - RULE-SET,private_domain,DIRECT
   - RULE-SET,InternationalDNS,🌐 国际DNS,
   - RULE-SET,apple_domain,🍎 Apple
-  - RULE-SET,proxylite,🚀 手动切换
   - RULE-SET,ai,🤖 AI
   - RULE-SET,github_domain,👨🏿‍💻 GitHub
   - RULE-SET,youtube_domain,📹 YouTube
-  - RULE-SET,google_domain,🍀 Google
+  - RULE-SET,google_domain,🔍️ Google
   - RULE-SET,onedrive_domain,Ⓜ️ OneDrive
   - RULE-SET,microsoft_domain,Ⓜ️ Microsoft
   - RULE-SET,tiktok_domain,🎵 TikTok
@@ -299,12 +298,14 @@ rules:
   - RULE-SET,netflix_domain,🎥 NETFLIX
   - RULE-SET,ProxyMedia,🌍 国外媒体
   - RULE-SET,paypal_domain,💶 PayPal
-  - RULE-SET,gfw_domain,🚀 手动切换
-  - RULE-SET,geolocation-!cn,🚀 手动切换
+  - RULE-SET,Mail,📧 邮件服务
+
   - RULE-SET,cn_domain,🎯 全球直连
-  - RULE-SET,google_ip,🍀 Google,no-resolve
+  - RULE-SET,google_ip,🔍️ Google,no-resolve
   - RULE-SET,netflix_ip,🎥 NETFLIX,no-resolve
   - RULE-SET,telegram_ip,📲 Telegram,no-resolve
+  - RULE-SET,gfw_domain,🚀 手动切换
+  - RULE-SET,geolocation-!cn,🚀 手动切换
   - RULE-SET,cn_ip,🎯 全球直连
   - MATCH,🐟 漏网之鱼
 
@@ -315,6 +316,11 @@ rule-anchor:
   class:
     &class { type: http, interval: 86400, behavior: classical, format: text }
 rule-providers:
+  Mail:
+    {
+      <<: *class,
+      url: "https://raw.githubusercontent.com/RobotRunM2/ACL4SSR/refs/heads/master/Clash/Ruleset/Mail.list",
+    }
   Nintendo:
     {
       <<: *class,
@@ -344,11 +350,6 @@ rule-providers:
     {
       <<: *class,
       url: "https://raw.githubusercontent.com/RobotRunM2/ACL4SSR/refs/heads/master/Clash/Ruleset/InternationalDNS.list",
-    }
-  proxylite:
-    {
-      <<: *class,
-      url: "https://raw.githubusercontent.com/qichiyuhub/rule/refs/heads/main/proxy.list",
     }
   ai:
     {
