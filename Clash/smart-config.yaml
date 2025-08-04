@@ -114,40 +114,41 @@ dns:
 
 ######### 锚点 start #######
 # 策略组相关
-smart:
-  &smart {
-    type: smart,
-    uselightgbm: true,
-    collectdata: true,
-    strategy: sticky-sessions,
-  }
-#这里是订阅更新和延迟测试相关的
-proxies:
-  &proxies {
-    proxies:
-      [
-        🚀 手动切换,
-        🇭🇰 香港流量,
-        🇯🇵 日本流量,
-        🇺🇲 美国流量,
-        🇨🇳 台湾流量,
-        🇸🇬 狮城流量,
-        🇰🇷 韩国流量,
-        🇪🇺 欧洲流量,
-        🌏 亚洲流量,
-        🇭🇰 香港带宽,
-        🇯🇵 日本带宽,
-        🇺🇲 美国带宽,
-        🇨🇳 台湾带宽,
-        🇸🇬 狮城带宽,
-        🇰🇷 韩国带宽,
-        🇪🇺 欧洲带宽,
-        🌏 亚洲带宽,
-        🎲 其他带宽,
-        🌐 全部节点,
-        DIRECT,
-      ],
-  }
+proxy-xxx:
+  smart:
+    &smart {
+      type: smart,
+      uselightgbm: true,
+      collectdata: true,
+      strategy: sticky-sessions,
+    }
+  #这里是订阅更新和延迟测试相关的
+  proxies:
+    &proxies {
+      proxies:
+        [
+          🚀 手动切换,
+          🇭🇰 香港流量,
+          🇯🇵 日本流量,
+          🇺🇲 美国流量,
+          🇨🇳 台湾流量,
+          🇸🇬 狮城流量,
+          🇰🇷 韩国流量,
+          🇪🇺 欧洲流量,
+          🌏 亚洲流量,
+          🇭🇰 香港带宽,
+          🇯🇵 日本带宽,
+          🇺🇲 美国带宽,
+          🇨🇳 台湾带宽,
+          🇸🇬 狮城带宽,
+          🇰🇷 韩国带宽,
+          🇪🇺 欧洲带宽,
+          🌏 亚洲带宽,
+          🎲 其他带宽,
+          🌐 全部节点,
+          DIRECT,
+        ],
+    }
 
 ######### 锚点 end #######
 
