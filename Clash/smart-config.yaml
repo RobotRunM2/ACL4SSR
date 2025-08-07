@@ -156,7 +156,7 @@ proxy-xxx:
 # 如果相应分组没有筛选到对应的国家，请根据自己节点名字调整筛选关键字。
 # 没有再使用锚点，是考虑很多新手修改难度，这样新手修改某个分组更容易些。
 proxy-groups:
-  - { name: 🚀 手动切换, type: select, include-all: true }
+  - { name: 🚀 手动切换, type: select, include-all: true, <<: *proxies }
   - { name: 🌐 国际DNS, type: select, <<: *proxies }
   - { name: 📲 Telegram, type: select, <<: *proxies }
   - { name: 📹 YouTube, type: select, <<: *proxies }
