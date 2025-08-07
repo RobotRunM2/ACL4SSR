@@ -6,7 +6,7 @@ proxy-providers:
   Airport1:
     url: "https://sub.xiaocao.im/wwg01269/download/collection/%E7%BB%84%E5%90%88?target=ClashMeta"
     type: http
-    interval: 86400
+    interval: 3600
     health-check:
       enable: true
       url: https://www.gstatic.com/generate_204
@@ -127,7 +127,7 @@ proxy-xxx:
     &proxies {
       proxies:
         [
-          🚀 手动切换,
+          👈 手动切换,
           🇭🇰 香港流量,
           🇯🇵 日本流量,
           🇺🇲 美国流量,
@@ -156,7 +156,8 @@ proxy-xxx:
 # 如果相应分组没有筛选到对应的国家，请根据自己节点名字调整筛选关键字。
 # 没有再使用锚点，是考虑很多新手修改难度，这样新手修改某个分组更容易些。
 proxy-groups:
-  - { name: 🚀 手动切换, type: select, include-all: true, <<: *proxies }
+  - { name: 👈 手动切换, type: select, include-all: true }
+  - { name: 🚀 默认过墙, type: select, <<: *proxies }
   - { name: 🌐 国际DNS, type: select, <<: *proxies }
   - { name: 📲 Telegram, type: select, <<: *proxies }
   - { name: 📹 YouTube, type: select, <<: *proxies }
@@ -174,7 +175,7 @@ proxy-groups:
   - { name: 🍎 Apple, type: select, <<: *proxies }
   - { name: 🎮 游戏平台, type: select, <<: *proxies }
   - { name: 🐟 漏网之鱼, type: select, <<: *proxies }
-  - { name: 🎯 全球直连, type: select, proxies: [DIRECT, 🚀 手动切换] }
+  - { name: 🎯 全球直连, type: select, proxies: [DIRECT, 👈 手动切换] }
   - { name: 🛑 广告拦截, type: select, proxies: [DIRECT, REJECT] }
   - { name: 🍃 应用净化, type: select, proxies: [DIRECT, REJECT] }
 
@@ -305,8 +306,8 @@ rules:
   - RULE-SET,google_ip,🔍️ Google,no-resolve
   - RULE-SET,netflix_ip,🎥 NETFLIX,no-resolve
   - RULE-SET,telegram_ip,📲 Telegram,no-resolve
-  - RULE-SET,gfw_domain,🚀 手动切换
-  - RULE-SET,geolocation-!cn,🚀 手动切换
+  - RULE-SET,gfw_domain,🚀 默认过墙
+  - RULE-SET,geolocation-!cn,🚀 默认过墙
   - RULE-SET,cn_ip,🎯 全球直连
   - MATCH,🐟 漏网之鱼
 
