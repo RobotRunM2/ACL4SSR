@@ -4,7 +4,7 @@
 # 机场订阅
 proxy-providers:
   Airport1:
-    url: "https://sub.xiaocao.im/wwg01269/download/collection/%E7%BB%84%E5%90%88?target=ClashMeta"
+    url: "https://sub.xiaocao.im/share/col/%E7%BB%84%E5%90%88?token=IVuth0LDWPEwGMzuY529_&target=ClashMeta"
     type: http
     interval: 3600
     health-check:
