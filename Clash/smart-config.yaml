@@ -301,13 +301,11 @@ rules:
   - RULE-SET,ProxyMedia,🌍 国外媒体
   - RULE-SET,paypal_domain,💶 PayPal
   - RULE-SET,Mail,📧 邮件服务
-
-  - RULE-SET,cn_domain,🎯 全球直连
   - RULE-SET,google_ip,🔍️ Google,no-resolve
   - RULE-SET,netflix_ip,🎥 NETFLIX,no-resolve
   - RULE-SET,telegram_ip,📲 Telegram,no-resolve
   - RULE-SET,gfw_domain,🚀 默认过墙
-  - RULE-SET,geolocation-!cn,🚀 默认过墙
+  - RULE-SET,cn_domain,🎯 全球直连
   - RULE-SET,cn_ip,🎯 全球直连
   - MATCH,🐟 漏网之鱼
 
@@ -416,7 +414,7 @@ rule-providers:
   gfw_domain:
     {
       <<: *domain,
-      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/gfw.mrs",
+      url: "https://raw.githubusercontent.com/RobotRunM2/ACL4SSR/refs/heads/master/Clash/Ruleset/ProxyGFWlist.list",
     }
   geolocation-!cn:
     {
