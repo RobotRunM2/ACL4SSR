@@ -414,7 +414,7 @@ rule-providers:
   gfw_domain:
     {
       <<: *domain,
-      url: "https://raw.githubusercontent.com/RobotRunM2/ACL4SSR/refs/heads/master/Clash/Ruleset/ProxyGFWlist.list",
+      url: "https://raw.githubusercontent.com/RobotRunM2/ACL4SSR/refs/heads/master/Clash/ProxyGFWlist.list",
     }
   geolocation-!cn:
     {
