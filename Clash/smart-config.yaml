@@ -413,7 +413,7 @@ rule-providers:
     }
   gfw_domain:
     {
-      <<: *domain,
+      <<: *class,
       url: "https://raw.githubusercontent.com/RobotRunM2/ACL4SSR/refs/heads/master/Clash/ProxyGFWlist.list",
     }
   geolocation-!cn:
