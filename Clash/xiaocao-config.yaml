@@ -4,14 +4,14 @@
 # 机场订阅
 proxy-providers:
   Airport1:
-    url: "https://sub.xiaocao.im/wwg01269/download/collection/%E7%BB%84%E5%90%88?target=ClashMeta"
+    url: "https://sub.xiaocao.im/share/col/%E7%BB%84%E5%90%88?token=IVuth0LDWPEwGMzuY529_&target=ClashMeta"
     type: http
-    interval: 86400
+    interval: 3600
     health-check:
       enable: true
       url: https://www.gstatic.com/generate_204
       interval: 300
-    proxy: direct
+    proxy: DIRECT
 
 # 节点信息
 # proxies:
@@ -35,7 +35,22 @@ global-client-fingerprint: chrome
 keep-alive-idle: 600
 keep-alive-interval: 15
 disable-keep-alive: false
+
+# url-test 相关
+# enable model auto update, the default is false
+lgbm-auto-update: true
+# model auto update interval, the default is 72 (hours)
+lgbm-update-interval: 72
+# model update url
+lgbm-url: "https://github.com/vernesong/mihomo/releases/download/LightGBM-Model/Model.bin"
+
+# profile:
+#   #url-test-collector-size: data collection file size, the default is 100 (MB)
+#   url-test-collector-size: 100
+
 profile:
+  #url-test-collector-size: data collection file size, the default is 100 (MB)
+  url-test-collector-size: 100
   store-selected: true
   store-fake-ip: true
 
@@ -50,6 +65,9 @@ profile:
 # 嗅探
 sniffer:
   enable: true
+  force-dns-mapping: true
+  parse-pure-ip: true
+  override-destination: false
   sniff:
     HTTP:
       ports: [80, 8080-8880]
@@ -97,534 +115,188 @@ dns:
     - 223.5.5.5
     - 119.29.29.29
 
+######### 锚点 start #######
+# 策略组相关
+proxy-xxx:
+  url-test:
+    &url-test {
+      type: url-test,
+      uselightgbm: true,
+      collectdata: true,
+      strategy: sticky-sessions,
+    }
+  #这里是订阅更新和延迟测试相关的
+  proxies:
+    &proxies {
+      proxies:
+        [
+          👈 手动切换,
+          🇭🇰 香港流量,
+          🇯🇵 日本流量,
+          🇺🇲 美国流量,
+          🇨🇳 台湾流量,
+          🇸🇬 狮城流量,
+          🇰🇷 韩国流量,
+          🇪🇺 欧洲流量,
+          🌏 亚洲流量,
+          🇭🇰 香港带宽,
+          🇯🇵 日本带宽,
+          🇺🇲 美国带宽,
+          🇨🇳 台湾带宽,
+          🇸🇬 狮城带宽,
+          🇰🇷 韩国带宽,
+          🇪🇺 欧洲带宽,
+          🌏 亚洲带宽,
+          🎲 其他带宽,
+          🌐 全部节点,
+          DIRECT,
+        ],
+    }
+
+######### 锚点 end #######
+
 # 出站策略，根据自己情况调整每个策略里分组排序，增删都可以，比如把美国自动放到第一个，比如删除香港故转，注意别漏掉表情逗号等。
 # 如果相应分组没有筛选到对应的国家，请根据自己节点名字调整筛选关键字。
 # 没有再使用锚点，是考虑很多新手修改难度，这样新手修改某个分组更容易些。
 proxy-groups:
-  - { name: 🚀 手动切换, type: select, include-all: true }
-  - {
-      name: 🌐 国际DNS,
-      type: select,
-      include-all: true,
-      proxies:
-        [
-          🚀 手动切换,
-          🇭🇰 香港流量,
-          🇯🇵 日本流量,
-          🇺🇲 美国流量,
-          🇨🇳 台湾流量,
-          🇸🇬 狮城流量,
-          🇰🇷 韩国流量,
-          🇪🇺 欧洲流量,
-          🌏 亚洲流量,
-          🇭🇰 香港带宽,
-          🇯🇵 日本带宽,
-          🇺🇲 美国带宽,
-          🇨🇳 台湾带宽,
-          🇸🇬 狮城带宽,
-          🇰🇷 韩国带宽,
-          🇪🇺 欧洲带宽,
-          🌏 亚洲带宽,
-          🎲 其他带宽,
-          🌐 全部节点,
-        ],
-    }
-  - {
-      name: 📲 Telegram,
-      type: select,
-      proxies:
-        [
-          🇭🇰 香港流量,
-          🇯🇵 日本流量,
-          🇺🇲 美国流量,
-          🇨🇳 台湾流量,
-          🇸🇬 狮城流量,
-          🇰🇷 韩国流量,
-          🇪🇺 欧洲流量,
-          🌏 亚洲流量,
-          🇭🇰 香港带宽,
-          🇯🇵 日本带宽,
-          🇺🇲 美国带宽,
-          🇨🇳 台湾带宽,
-          🇸🇬 狮城带宽,
-          🇰🇷 韩国带宽,
-          🇪🇺 欧洲带宽,
-          🌏 亚洲带宽,
-          🎲 其他带宽,
-          🌐 全部节点,
-        ],
-    }
-  - {
-      name: 📹 YouTube,
-      type: select,
-      proxies:
-        [
-          🇭🇰 香港流量,
-          🇯🇵 日本流量,
-          🇺🇲 美国流量,
-          🇨🇳 台湾流量,
-          🇸🇬 狮城流量,
-          🇰🇷 韩国流量,
-          🇪🇺 欧洲流量,
-          🌏 亚洲流量,
-          🇭🇰 香港带宽,
-          🇯🇵 日本带宽,
-          🇺🇲 美国带宽,
-          🇨🇳 台湾带宽,
-          🇸🇬 狮城带宽,
-          🇰🇷 韩国带宽,
-          🇪🇺 欧洲带宽,
-          🌏 亚洲带宽,
-          🎲 其他带宽,
-          🌐 全部节点,
-        ],
-    }
-  - {
-      name: 🍀 Google,
-      type: select,
-      proxies:
-        [
-          🇭🇰 香港流量,
-          🇯🇵 日本流量,
-          🇺🇲 美国流量,
-          🇨🇳 台湾流量,
-          🇸🇬 狮城流量,
-          🇰🇷 韩国流量,
-          🇪🇺 欧洲流量,
-          🌏 亚洲流量,
-          🇭🇰 香港带宽,
-          🇯🇵 日本带宽,
-          🇺🇲 美国带宽,
-          🇨🇳 台湾带宽,
-          🇸🇬 狮城带宽,
-          🇰🇷 韩国带宽,
-          🇪🇺 欧洲带宽,
-          🌏 亚洲带宽,
-          🎲 其他带宽,
-          🌐 全部节点,
-        ],
-    }
-  - {
-      name: 🤖 AI,
-      type: select,
-      proxies:
-        [
-          🇭🇰 香港流量,
-          🇯🇵 日本流量,
-          🇺🇲 美国流量,
-          🇨🇳 台湾流量,
-          🇸🇬 狮城流量,
-          🇰🇷 韩国流量,
-          🇪🇺 欧洲流量,
-          🌏 亚洲流量,
-          🇭🇰 香港带宽,
-          🇯🇵 日本带宽,
-          🇺🇲 美国带宽,
-          🇨🇳 台湾带宽,
-          🇸🇬 狮城带宽,
-          🇰🇷 韩国带宽,
-          🇪🇺 欧洲带宽,
-          🌏 亚洲带宽,
-          🎲 其他带宽,
-          🌐 全部节点,
-        ],
-    }
-  - {
-      name: 👨🏿‍💻 GitHub,
-      type: select,
-      proxies:
-        [
-          🇭🇰 香港流量,
-          🇯🇵 日本流量,
-          🇺🇲 美国流量,
-          🇨🇳 台湾流量,
-          🇸🇬 狮城流量,
-          🇰🇷 韩国流量,
-          🇪🇺 欧洲流量,
-          🌏 亚洲流量,
-          🇭🇰 香港带宽,
-          🇯🇵 日本带宽,
-          🇺🇲 美国带宽,
-          🇨🇳 台湾带宽,
-          🇸🇬 狮城带宽,
-          🇰🇷 韩国带宽,
-          🇪🇺 欧洲带宽,
-          🌏 亚洲带宽,
-          🎲 其他带宽,
-          🌐 全部节点,
-        ],
-    }
-  - {
-      name: Ⓜ️ OneDrive,
-      type: select,
-      proxies:
-        [
-          🇭🇰 香港流量,
-          🇯🇵 日本流量,
-          🇺🇲 美国流量,
-          🇨🇳 台湾流量,
-          🇸🇬 狮城流量,
-          🇰🇷 韩国流量,
-          🇪🇺 欧洲流量,
-          🌏 亚洲流量,
-          🇭🇰 香港带宽,
-          🇯🇵 日本带宽,
-          🇺🇲 美国带宽,
-          🇨🇳 台湾带宽,
-          🇸🇬 狮城带宽,
-          🇰🇷 韩国带宽,
-          🇪🇺 欧洲带宽,
-          🌏 亚洲带宽,
-          🎲 其他带宽,
-          🌐 全部节点,
-        ],
-    }
-  - {
-      name: Ⓜ️ Microsoft,
-      type: select,
-      proxies:
-        [
-          🇭🇰 香港流量,
-          🇯🇵 日本流量,
-          🇺🇲 美国流量,
-          🇨🇳 台湾流量,
-          🇸🇬 狮城流量,
-          🇰🇷 韩国流量,
-          🇪🇺 欧洲流量,
-          🌏 亚洲流量,
-          🇭🇰 香港带宽,
-          🇯🇵 日本带宽,
-          🇺🇲 美国带宽,
-          🇨🇳 台湾带宽,
-          🇸🇬 狮城带宽,
-          🇰🇷 韩国带宽,
-          🇪🇺 欧洲带宽,
-          🌏 亚洲带宽,
-          🎲 其他带宽,
-          🌐 全部节点,
-        ],
-    }
-  - {
-      name: 🎵 TikTok,
-      type: select,
-      proxies:
-        [
-          🇭🇰 香港流量,
-          🇯🇵 日本流量,
-          🇺🇲 美国流量,
-          🇨🇳 台湾流量,
-          🇸🇬 狮城流量,
-          🇰🇷 韩国流量,
-          🇪🇺 欧洲流量,
-          🌏 亚洲流量,
-          🇭🇰 香港带宽,
-          🇯🇵 日本带宽,
-          🇺🇲 美国带宽,
-          🇨🇳 台湾带宽,
-          🇸🇬 狮城带宽,
-          🇰🇷 韩国带宽,
-          🇪🇺 欧洲带宽,
-          🌏 亚洲带宽,
-          🎲 其他带宽,
-          🌐 全部节点,
-        ],
-    }
-  - {
-      name: 🌍 国外媒体,
-      type: select,
-      proxies:
-        [
-          🇭🇰 香港流量,
-          🇯🇵 日本流量,
-          🇺🇲 美国流量,
-          🇨🇳 台湾流量,
-          🇸🇬 狮城流量,
-          🇰🇷 韩国流量,
-          🇪🇺 欧洲流量,
-          🌏 亚洲流量,
-          🇭🇰 香港带宽,
-          🇯🇵 日本带宽,
-          🇺🇲 美国带宽,
-          🇨🇳 台湾带宽,
-          🇸🇬 狮城带宽,
-          🇰🇷 韩国带宽,
-          🇪🇺 欧洲带宽,
-          🌏 亚洲带宽,
-          🎲 其他带宽,
-          🌐 全部节点,
-        ],
-    }
-  - {
-      name: 🎥 NETFLIX,
-      type: select,
-      proxies:
-        [
-          🇭🇰 香港流量,
-          🇯🇵 日本流量,
-          🇺🇲 美国流量,
-          🇨🇳 台湾流量,
-          🇸🇬 狮城流量,
-          🇰🇷 韩国流量,
-          🇪🇺 欧洲流量,
-          🌏 亚洲流量,
-          🇭🇰 香港带宽,
-          🇯🇵 日本带宽,
-          🇺🇲 美国带宽,
-          🇨🇳 台湾带宽,
-          🇸🇬 狮城带宽,
-          🇰🇷 韩国带宽,
-          🇪🇺 欧洲带宽,
-          🌏 亚洲带宽,
-          🎲 其他带宽,
-          🌐 全部节点,
-        ],
-    }
-  - {
-      name: ✈️ Speedtest,
-      type: select,
-      proxies:
-        [
-          🇭🇰 香港流量,
-          🇯🇵 日本流量,
-          🇺🇲 美国流量,
-          🇨🇳 台湾流量,
-          🇸🇬 狮城流量,
-          🇰🇷 韩国流量,
-          🇪🇺 欧洲流量,
-          🌏 亚洲流量,
-          🇭🇰 香港带宽,
-          🇯🇵 日本带宽,
-          🇺🇲 美国带宽,
-          🇨🇳 台湾带宽,
-          🇸🇬 狮城带宽,
-          🇰🇷 韩国带宽,
-          🇪🇺 欧洲带宽,
-          🌏 亚洲带宽,
-          🎲 其他带宽,
-          🌐 全部节点,
-        ],
-    }
-  - {
-      name: 💶 PayPal,
-      type: select,
-      proxies:
-        [
-          🇭🇰 香港流量,
-          🇯🇵 日本流量,
-          🇺🇲 美国流量,
-          🇨🇳 台湾流量,
-          🇸🇬 狮城流量,
-          🇰🇷 韩国流量,
-          🇪🇺 欧洲流量,
-          🌏 亚洲流量,
-          🇭🇰 香港带宽,
-          🇯🇵 日本带宽,
-          🇺🇲 美国带宽,
-          🇨🇳 台湾带宽,
-          🇸🇬 狮城带宽,
-          🇰🇷 韩国带宽,
-          🇪🇺 欧洲带宽,
-          🌏 亚洲带宽,
-          🎲 其他带宽,
-          🌐 全部节点,
-        ],
-    }
-  - {
-      name: 🍎 Apple,
-      type: select,
-      proxies:
-        [
-          🇭🇰 香港流量,
-          🇯🇵 日本流量,
-          🇺🇲 美国流量,
-          🇨🇳 台湾流量,
-          🇸🇬 狮城流量,
-          🇰🇷 韩国流量,
-          🇪🇺 欧洲流量,
-          🌏 亚洲流量,
-          🇭🇰 香港带宽,
-          🇯🇵 日本带宽,
-          🇺🇲 美国带宽,
-          🇨🇳 台湾带宽,
-          🇸🇬 狮城带宽,
-          🇰🇷 韩国带宽,
-          🇪🇺 欧洲带宽,
-          🌏 亚洲带宽,
-          🎲 其他带宽,
-          🌐 全部节点,
-        ],
-    }
-  - {
-      name: 🎮 游戏平台,
-      type: select,
-      proxies:
-        [
-          🇭🇰 香港流量,
-          🇯🇵 日本流量,
-          🇺🇲 美国流量,
-          🇨🇳 台湾流量,
-          🇸🇬 狮城流量,
-          🇰🇷 韩国流量,
-          🇪🇺 欧洲流量,
-          🌏 亚洲流量,
-          🇭🇰 香港带宽,
-          🇯🇵 日本带宽,
-          🇺🇲 美国带宽,
-          🇨🇳 台湾带宽,
-          🇸🇬 狮城带宽,
-          🇰🇷 韩国带宽,
-          🇪🇺 欧洲带宽,
-          🌏 亚洲带宽,
-          🎲 其他带宽,
-          🌐 全部节点,
-        ],
-    }
-
-  - {
-      name: 🐟 漏网之鱼,
-      type: select,
-      proxies:
-        [
-          🇭🇰 香港流量,
-          🇯🇵 日本流量,
-          🇺🇲 美国流量,
-          🇨🇳 台湾流量,
-          🇸🇬 狮城流量,
-          🇰🇷 韩国流量,
-          🇪🇺 欧洲流量,
-          🌏 亚洲流量,
-          🇭🇰 香港带宽,
-          🇯🇵 日本带宽,
-          🇺🇲 美国带宽,
-          🇨🇳 台湾带宽,
-          🇸🇬 狮城带宽,
-          🇰🇷 韩国带宽,
-          🇪🇺 欧洲带宽,
-          🌏 亚洲带宽,
-          🎲 其他带宽,
-          🌐 全部节点,
-        ],
-    }
-  - { name: 🎯 全球直连, type: select, proxies: [DIRECT, 🚀 手动切换] }
+  - { name: 👈 手动切换, type: select, include-all: true }
+  - { name: 🚀 默认过墙, type: select, <<: *proxies }
+  - { name: 🌐 国际DNS, type: select, <<: *proxies }
+  - { name: 📲 Telegram, type: select, <<: *proxies }
+  - { name: 📹 YouTube, type: select, <<: *proxies }
+  - { name: 🔍️ Google, type: select, <<: *proxies }
+  - { name: 🤖 AI, type: select, <<: *proxies }
+  - { name: 👨🏿‍💻 GitHub, type: select, <<: *proxies }
+  - { name: Ⓜ️ OneDrive, type: select, <<: *proxies }
+  - { name: Ⓜ️ Microsoft, type: select, <<: *proxies }
+  - { name: 🎵 TikTok, type: select, <<: *proxies }
+  - { name: 📧 邮件服务, type: select, <<: *proxies }
+  - { name: 🌍 国外媒体, type: select, <<: *proxies }
+  - { name: 🎥 NETFLIX, type: select, <<: *proxies }
+  - { name: ✈️ Speedtest, type: select, <<: *proxies }
+  - { name: 💶 PayPal, type: select, <<: *proxies }
+  - { name: 🍎 Apple, type: select, <<: *proxies }
+  - { name: 🎮 游戏平台, type: select, <<: *proxies }
+  - { name: 🐟 漏网之鱼, type: select, <<: *proxies }
+  - { name: 🎯 全球直连, type: select, proxies: [DIRECT, 👈 手动切换] }
   - { name: 🛑 广告拦截, type: select, proxies: [DIRECT, REJECT] }
   - { name: 🍃 应用净化, type: select, proxies: [DIRECT, REJECT] }
 
   - {
       name: 🇭🇰 香港流量,
-      type: smart,
+      <<: *url-test,
       include-all: true,
       filter: "(?=.*(港|HK|hk|Hong Kong|HongKong|hongkong))(?=.*(\\dx|x\\d))",
     }
   - {
       name: 🇯🇵 日本流量,
-      type: smart,
+      <<: *url-test,
       include-all: true,
       filter: "(?=.*(日本|川日|东京|大阪|泉日|埼玉|沪日|深日|JP|Japan))(?=.*(\\dx|x\\d))",
     }
   - {
       name: 🇺🇲 美国流量,
-      type: smart,
+      <<: *url-test,
       include-all: true,
       filter: "(?=.*(美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States))(?=.*(\\dx|x\\d))",
     }
   - {
       name: 🇨🇳 台湾流量,
-      type: smart,
+      <<: *url-test,
       include-all: true,
       filter: "(?=.*(台|新北|彰化|TW|Taiwan))(?=.*(\\dx|x\\d))",
     }
   - {
       name: 🇸🇬 狮城流量,
-      type: smart,
+      <<: *url-test,
       include-all: true,
       filter: "(?=.*(新加坡|坡|狮城|SG|Singapore))(?=.*(\\dx|x\\d))",
     }
   - {
       name: 🇰🇷 韩国流量,
-      type: smart,
+      <<: *url-test,
       include-all: true,
       filter: "(?=.*(KR|Korea|KOR|首尔|韩|韓))(?=.*(\\dx|x\\d))",
     }
   - {
       name: 🇪🇺 欧洲流量,
-      type: smart,
+      <<: *url-test,
       include-all: true,
       filter: "(?=.*(波兰|荷兰|英国|法国|德国|🇪🇺|PL))(?=.*(\\dx|x\\d))",
     }
   - {
       name: 🌏 亚洲流量,
-      type: smart,
+      <<: *url-test,
       include-all: true,
       filter: "(?=.*(伊朗|阿联酋|印度|柬埔寨|泰国))(?=.*(\\dx|x\\d))",
     }
 
   - {
       name: 🇭🇰 香港带宽,
-      type: smart,
+      <<: *url-test,
       include-all: true,
       filter: "(?=.*(港|HK|hk|Hong Kong|HongKong|hongkong))(?!.*(\\dx|x\\d))",
     }
   - {
       name: 🇯🇵 日本带宽,
-      type: smart,
+      <<: *url-test,
       include-all: true,
       filter: "(?=.*(日本|川日|东京|大阪|泉日|埼玉|沪日|深日|JP|Japan))(?!.*(\\dx|x\\d))",
     }
   - {
       name: 🇺🇲 美国带宽,
-      type: smart,
+      <<: *url-test,
       include-all: true,
       filter: "(?=.*(美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States))(?!.*(\\dx|x\\d))",
     }
   - {
       name: 🇨🇳 台湾带宽,
-      type: smart,
+      <<: *url-test,
       include-all: true,
       filter: "(?=.*(台|新北|彰化|TW|Taiwan))(?!.*(\\dx|x\\d))",
     }
   - {
       name: 🇸🇬 狮城带宽,
-      type: smart,
+      <<: *url-test,
       include-all: true,
       filter: "(?=.*(新加坡|坡|狮城|SG|Singapore))(?!.*(\\dx|x\\d))",
     }
   - {
       name: 🇰🇷 韩国带宽,
-      type: smart,
+      <<: *url-test,
       include-all: true,
       filter: "(?=.*(KR|Korea|KOR|首尔|韩|韓))(?!.*(\\dx|x\\d))",
     }
   - {
       name: 🇪🇺 欧洲带宽,
-      type: smart,
+      <<: *url-test,
       include-all: true,
       filter: "(?=.*(波兰|荷兰|英国|法国|德国|🇪🇺|PL))(?!.*(\\dx|x\\d))",
     }
   - {
       name: 🌏 亚洲带宽,
-      type: smart,
+      <<: *url-test,
       include-all: true,
       filter: "(?=.*(伊朗|阿联酋|印度|柬埔寨|泰国))(?!.*(\\dx|x\\d))",
     }
   - {
       name: 🎲 其他带宽,
-      type: smart,
+      <<: *url-test,
       include-all: true,
       filter: "(?=.*(其他))",
     }
-  - { name: 🌐 全部节点, type: smart, include-all: true }
+  - { name: 🌐 全部节点, <<: *url-test, include-all: true }
 
 # 规则匹配
 # 此规则部分没有做防泄露处理，因为弊严重大于利！
 rules:
+  - RULE-SET,private_domain,DIRECT
   - RULE-SET,InternationalDNS,🌐 国际DNS,
-  - RULE-SET,private_domain,直连
   - RULE-SET,apple_domain,🍎 Apple
-  - RULE-SET,proxylite,🚀 手动切换
   - RULE-SET,ai,🤖 AI
   - RULE-SET,github_domain,👨🏿‍💻 GitHub
   - RULE-SET,youtube_domain,📹 YouTube
-  - RULE-SET,google_domain,🍀 Google
+  - RULE-SET,google_domain,🔍️ Google
   - RULE-SET,onedrive_domain,Ⓜ️ OneDrive
   - RULE-SET,microsoft_domain,Ⓜ️ Microsoft
   - RULE-SET,tiktok_domain,🎵 TikTok
@@ -636,12 +308,13 @@ rules:
   - RULE-SET,netflix_domain,🎥 NETFLIX
   - RULE-SET,ProxyMedia,🌍 国外媒体
   - RULE-SET,paypal_domain,💶 PayPal
-  - RULE-SET,gfw_domain,🚀 手动切换
-  - RULE-SET,geolocation-!cn,🚀 手动切换
-  - RULE-SET,cn_domain,🎯 全球直连
-  - RULE-SET,google_ip,🍀 Google,no-resolve
+  - RULE-SET,Mail,📧 邮件服务
+  - RULE-SET,google_ip,🔍️ Google,no-resolve
   - RULE-SET,netflix_ip,🎥 NETFLIX,no-resolve
   - RULE-SET,telegram_ip,📲 Telegram,no-resolve
+  - RULE-SET,gfw_domain,🚀 默认过墙
+  - RULE-SET,geolocation-!cn,🚀 默认过墙
+  - RULE-SET,cn_domain,🎯 全球直连
   - RULE-SET,cn_ip,🎯 全球直连
   - MATCH,🐟 漏网之鱼
 
@@ -652,6 +325,11 @@ rule-anchor:
   class:
     &class { type: http, interval: 86400, behavior: classical, format: text }
 rule-providers:
+  Mail:
+    {
+      <<: *class,
+      url: "https://raw.githubusercontent.com/RobotRunM2/ACL4SSR/refs/heads/master/Clash/Ruleset/Mail.list",
+    }
   Nintendo:
     {
       <<: *class,
@@ -681,11 +359,6 @@ rule-providers:
     {
       <<: *class,
       url: "https://raw.githubusercontent.com/RobotRunM2/ACL4SSR/refs/heads/master/Clash/Ruleset/InternationalDNS.list",
-    }
-  proxylite:
-    {
-      <<: *class,
-      url: "https://raw.githubusercontent.com/qichiyuhub/rule/refs/heads/main/proxy.list",
     }
   ai:
     {
@@ -749,8 +422,8 @@ rule-providers:
     }
   gfw_domain:
     {
-      <<: *domain,
-      url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/gfw.mrs",
+      <<: *class,
+      url: "https://raw.githubusercontent.com/RobotRunM2/ACL4SSR/refs/heads/master/Clash/ProxyGFWlist.list",
     }
   geolocation-!cn:
     {
