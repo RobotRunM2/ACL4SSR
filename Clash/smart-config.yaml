@@ -286,6 +286,7 @@ proxy-groups:
 # 此规则部分没有做防泄露处理，因为弊严重大于利！
 rules:
   - RULE-SET,private_domain,DIRECT
+  - RULE-SET,LAN,DIRECT
   - RULE-SET,InternationalDNS,🌐 国际DNS,
   - RULE-SET,apple_domain,🍎 Apple
   - RULE-SET,ai,🤖 AI
@@ -320,6 +321,12 @@ rule-anchor:
   class:
     &class { type: http, interval: 86400, behavior: classical, format: text }
 rule-providers:
+
+  LAN:
+    {
+      <<: *class,
+      url: "https://raw.githubusercontent.com/RobotRunM2/ACL4SSR/refs/heads/master/Clash/lan.list",
+    }
   Mail:
     {
       <<: *class,
